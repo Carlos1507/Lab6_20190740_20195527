@@ -1,6 +1,7 @@
 package com.example.lab6_20190740_20195527.adapters;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,13 +32,21 @@ public class ListaActividadesAdapter extends RecyclerView.Adapter<ListaActividad
     @Override
     public void onBindViewHolder(@NonNull ActividadesViewHolder holder, int position) {
         Actividad activ = listaActividades.get(position);
-        holder.actividad = activ;
 
+        holder.actividad = activ;
+        Log.d("msg-adapter", activ.getTitulo());
+        Log.d("msg-adapter", activ.getFecha());
+        Log.d("msg-adapter", activ.getHoraFin());
+        Log.d("msg-adapter", activ.getHoraInicio());
         TextView titulo = holder.itemView.findViewById(R.id.titulo);
         TextView fecha = holder.itemView.findViewById(R.id.fechaValue);
-        TextView horaInicio = holder.itemView.findViewById(R.id.horaInicio);
-        TextView horaFin = holder.itemView.findViewById(R.id.horaFin);
+        TextView horaInicio = holder.itemView.findViewById(R.id.inicioTime);
+        TextView horaFin = holder.itemView.findViewById(R.id.finTime);
 
+        titulo.setText(activ.getTitulo());
+        fecha.setText(activ.getFecha());
+        horaFin.setText(activ.getHoraFin());
+        horaInicio.setText(activ.getHoraInicio());
     }
 
     @Override
@@ -52,4 +61,19 @@ public class ListaActividadesAdapter extends RecyclerView.Adapter<ListaActividad
         }
     }
 
+    public List<Actividad> getListaActividades() {
+        return listaActividades;
+    }
+
+    public void setListaActividades(List<Actividad> listaActividades) {
+        this.listaActividades = listaActividades;
+    }
+
+    public Context getContext() {
+        return context;
+    }
+
+    public void setContext(Context context) {
+        this.context = context;
+    }
 }

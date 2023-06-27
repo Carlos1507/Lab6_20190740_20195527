@@ -39,6 +39,7 @@
         android:layout_marginTop="192dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:srcCompat="@drawable/ositos" />
 
     <ImageView
