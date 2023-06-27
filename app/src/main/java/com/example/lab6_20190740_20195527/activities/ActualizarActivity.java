@@ -88,7 +88,6 @@ public class ActualizarActivity extends AppCompatActivity {
             String fechaStr = binding.editTextFecha.getText().toString();
             String timeInicioStr = binding.editTextHoraInicio.getText().toString();
             String timeFinStr = binding.editTextHoraFin.getText().toString();
-            Actividad actividadUpdate = new Actividad();
             actividad.setDescripcion(descripcion);
             actividad.setTitulo(titulo);
             actividad.setIdAct(actividad.getIdAct());
