@@ -9,8 +9,8 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 
-import com.example.lab6_20190740_20195527.DateFiltroPickerFragment;
-import com.example.lab6_20190740_20195527.TimePickerFragment;
+import com.example.lab6_20190740_20195527.fragmentTimeDate.DateFiltroPickerFragment;
+import com.example.lab6_20190740_20195527.fragmentTimeDate.TimePickerFragment;
 import com.example.lab6_20190740_20195527.databinding.ActivityMainBinding;
 import com.example.lab6_20190740_20195527.entities.Usuario;
 import com.firebase.ui.auth.AuthUI;

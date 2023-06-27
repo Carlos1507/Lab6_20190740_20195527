@@ -3,35 +3,27 @@ package com.example.lab6_20190740_20195527.activities;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
-import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
 import android.util.Log;
 
 
-import com.example.lab6_20190740_20195527.DateCrearPickerFragment;
-import com.example.lab6_20190740_20195527.TimeFinCrearPickerFragment;
-import com.example.lab6_20190740_20195527.TimeInicioCrearPickerFragment;
+import com.example.lab6_20190740_20195527.fragmentTimeDate.DateCrearPickerFragment;
+import com.example.lab6_20190740_20195527.fragmentTimeDate.TimeFinCrearPickerFragment;
+import com.example.lab6_20190740_20195527.fragmentTimeDate.TimeInicioCrearPickerFragment;
 import com.example.lab6_20190740_20195527.databinding.ActivityCrearBinding;
 import com.example.lab6_20190740_20195527.entities.Actividad;
 import com.example.lab6_20190740_20195527.entities.Usuario;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
-import java.io.File;
 import java.lang.reflect.Type;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -43,18 +35,6 @@ public class CrearActivity extends AppCompatActivity {
     public LocalDate fecha;
     public LocalTime horaInicio;
     public LocalTime horaFin;
-
-    public LocalDate getFecha() {
-        return fecha;
-    }
-
-    public LocalTime getHoraInicio() {
-        return horaInicio;
-    }
-
-    public LocalTime getHoraFin() {
-        return horaFin;
-    }
 
     public void setHoraFin(LocalTime horaFin) {
         this.horaFin = horaFin;
@@ -68,7 +48,7 @@ public class CrearActivity extends AppCompatActivity {
 
     public void setFecha(LocalDate fecha) {
         this.fecha = fecha;
-        binding.editTextFecha.setText(fecha.getDayOfMonth()+"/"+fecha.getMonthValue()+"/"+fecha.getYear());
+        binding.editTextFecha.setText(fecha.getDayOfMonth()+"/"+(fecha.getMonthValue()+1)+"/"+fecha.getYear());
     }
 
     @Override
@@ -92,24 +72,20 @@ public class CrearActivity extends AppCompatActivity {
             TimeInicioCrearPickerFragment timeInicioCrearPickerFragment = new TimeInicioCrearPickerFragment();
             timeInicioCrearPickerFragment.show(getSupportFragmentManager(), "timeInicioCrearPicker");
         });
-
         binding.editTextFecha.setOnClickListener(view -> {
             DateCrearPickerFragment dateCrearPickerFragment = new DateCrearPickerFragment();
             dateCrearPickerFragment.show(getSupportFragmentManager(), "dateCrearPicker");
         });
-
         binding.editTextHoraFin.setOnClickListener(view -> {
             TimeFinCrearPickerFragment timeFinCrearPickerFragment = new TimeFinCrearPickerFragment();
             timeFinCrearPickerFragment.show(getSupportFragmentManager(), "timeFinCrearPicker");
         });
-
         binding.anadirActividad.setOnClickListener(view -> {
             String titulo = binding.editTextTitulo.getText().toString();
             String descripcion = binding.editTextDescripcion.getText().toString();
             String fechaStr = binding.editTextFecha.getText().toString();
             String timeInicioStr = binding.editTextHoraInicio.getText().toString();
             String timeFinStr = binding.editTextHoraFin.getText().toString();
-            Log.d("msg-act", ""+getFecha().getYear());
             databaseReference.child(uuid).addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -123,6 +99,8 @@ public class CrearActivity extends AppCompatActivity {
                     actividad.setFecha(fechaStr);
                     Log.d("googlekey", usuarioLog.getGoogleKey());
                     databaseReference.child(uuid).child(actividad.getIdAct()).setValue(actividad);
+                    Intent intent = new Intent(CrearActivity.this, MainActivity.class);
+                    startActivity(intent);
                 }
 
                 @Override

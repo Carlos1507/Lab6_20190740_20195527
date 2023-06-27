@@ -1,4 +1,4 @@
-package com.example.lab6_20190740_20195527;
+package com.example.lab6_20190740_20195527.fragmentTimeDate;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
@@ -9,16 +9,16 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 
-import com.example.lab6_20190740_20195527.activities.CrearActivity;
+import com.example.lab6_20190740_20195527.activities.MainActivity;
 
-import java.time.LocalDate;
 import java.util.Calendar;
 
-public class DateCrearPickerFragment extends DialogFragment implements DatePickerDialog.OnDateSetListener {
+public class DateFiltroPickerFragment extends DialogFragment implements DatePickerDialog.OnDateSetListener {
+
     @Override
     public void onDateSet(DatePicker datePicker, int year, int month, int day) {
-        CrearActivity crearActivity = (CrearActivity) getActivity();
-        crearActivity.setFecha(LocalDate.of(year, month, day));
+        MainActivity mainActivity = (MainActivity) getActivity();
+        mainActivity.respuestaDateDialog(year, month, day);
     }
     @NonNull
     @Override
