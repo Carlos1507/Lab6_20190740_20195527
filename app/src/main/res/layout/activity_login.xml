@@ -7,23 +7,6 @@
     tools:context=".activities.LoginActivity">
 
 
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="64dp"
-        android:gravity="center_horizontal"
-        android:letterSpacing="-0.02"
-        android:lineSpacingExtra="0sp"
-        android:text="¡Bienvenido!"
-        android:textColor="#E3B5D5"
-        android:textSize="40sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <ImageView
         android:layout_width="30dp"
         android:layout_height="30dp"
@@ -39,36 +22,51 @@
         android:id="@+id/loginGoogle"
         android:layout_width="300dp"
         android:layout_height="60dp"
-        android:layout_marginTop="32dp"
         android:backgroundTint="#FFFFFF"
         android:text="Iniciar sesión con GOOGLE"
         android:textColor="#000000"
         android:textColorHint="#000000"
-        app:layout_constraintEnd_toEndOf="@+id/textView3"
-        app:layout_constraintStart_toStartOf="@+id/textView3"
-        app:layout_constraintTop_toBottomOf="@+id/textView3">
+        tools:layout_editor_absoluteX="56dp"
+        tools:layout_editor_absoluteY="178dp">
 
 
     </Button>
 
     <ImageView
-        android:id="@+id/imageView4"
-        android:layout_width="360dp"
-        android:layout_height="505dp"
+        android:id="@+id/imageView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="192dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ositos" />
+
+    <ImageView
+        android:id="@+id/imageView7"
+        android:layout_width="215dp"
+        android:layout_height="389dp"
+        android:layout_marginStart="180dp"
+        android:layout_marginTop="132dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/corazones" />
+
+    <ImageView
+        android:id="@+id/imageView8"
+        android:layout_width="215dp"
+        android:layout_height="389dp"
         android:layout_marginStart="24dp"
         android:layout_marginTop="132dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/gatito" />
+        app:srcCompat="@drawable/corazones" />
 
     <ImageView
-        android:id="@+id/imageView5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="188dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/huellas" />
+        android:id="@+id/imageView11"
+        android:layout_width="370dp"
+        android:layout_height="663dp"
+        app:srcCompat="@drawable/bienvenidos"
+        tools:layout_editor_absoluteX="25dp"
+        tools:layout_editor_absoluteY="-197dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
