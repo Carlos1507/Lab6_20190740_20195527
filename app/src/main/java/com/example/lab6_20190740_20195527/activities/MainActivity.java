@@ -23,10 +23,18 @@ import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
 import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.Month;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     ActivityMainBinding binding;
+    LocalDate fechaInicio;
+    Boolean setearDateInicio = false;
+    LocalDate fechaFin;
+    LocalTime horaInicio;
+    Boolean setearTimeInicio = false;
+    LocalTime horaFin;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,16 +46,22 @@ public class MainActivity extends AppCompatActivity {
         String userStr = sharedPreferences.getString("usuario","");
 
         binding.fechaInicio.setOnClickListener(view -> {
-            showDatePickerDialog();
+            DatePickerFragment datePickerFragment = new DatePickerFragment();
+            datePickerFragment.show(getSupportFragmentManager(), "datePicker");
+            setearDateInicio = true;
         });
         binding.fechaFin.setOnClickListener(view -> {
-            showDatePickerDialog();
+            DatePickerFragment datePickerFragment = new DatePickerFragment();
+            datePickerFragment.show(getSupportFragmentManager(), "datePicker");
         });
         binding.horaInicio.setOnClickListener(view -> {
-            showTimePickerDialog();
+            DialogFragment newFragment = new TimePickerFragment();
+            newFragment.show(getSupportFragmentManager(), "timePicker");
+            setearTimeInicio = true;
         });
         binding.horaFin.setOnClickListener(view -> {
-            showTimePickerDialog();
+            DialogFragment newFragment = new TimePickerFragment();
+            newFragment.show(getSupportFragmentManager(), "timePicker");
         });
 
         if (userStr.equals("")){
@@ -72,24 +86,29 @@ public class MainActivity extends AppCompatActivity {
             });
         }
     }
-
-    private void showDatePickerDialog(){
-        DatePickerFragment datePickerFragment = new DatePickerFragment();
-        datePickerFragment.show(getSupportFragmentManager(), "datePicker");
-    }
-    public void showTimePickerDialog() {
-        DialogFragment newFragment = new TimePickerFragment();
-        newFragment.show(getSupportFragmentManager(), "timePicker");
-    }
     public void respuestaDateDialog(int year, int month, int day){
-        Log.d("msg-test","year selected: " + year);
-        Log.d("msg-test","month selected: " + month);
-        Log.d("msg-test","day selected: " + day);
-        binding.fechaInicio.setText(day+"/"+(month+1)+"/"+year);
+        Month monthSelect = Month.of(month);
+        LocalDate fecha = LocalDate.of(year, monthSelect, day);
+        if (setearDateInicio){
+            fechaInicio = fecha;
+            binding.fechaInicio.setText(day+"/"+month+"/"+year);
+            setearDateInicio = false;
+        }else{
+            fechaFin = fecha;
+            binding.fechaFin.setText(day+"/"+month+"/"+year);
+        }
     }
     public void respuestaTimeDialog(int hour, int minute){
         Log.d("msg-test","hour selected: " + hour);
         Log.d("msg-test","minute selected: " + minute);
-        binding.horaInicio.setText(hour+":"+minute);
+        LocalTime time = LocalTime.of(hour, minute);
+        if (setearTimeInicio){
+            horaInicio = time;
+            binding.horaInicio.setText(hour+":"+minute);
+            setearTimeInicio = false;
+        }else{
+            horaFin = time;
+            binding.horaFin.setText(hour+":"+minute);
+        }
     }
 }

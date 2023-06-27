@@ -7,7 +7,7 @@
 
 
     <TextView
-        android:id="@+id/nombre"
+        android:id="@+id/titulo"
         android:layout_width="202dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
@@ -18,11 +18,11 @@
         android:textSize="15sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@id/fecha"
+        app:layout_constraintStart_toStartOf="@id/labelFecha"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/descripcion"
+        android:id="@+id/fechaValue"
         android:layout_width="134dp"
         android:layout_height="15dp"
         android:layout_marginStart="3dp"
@@ -30,11 +30,11 @@
         android:text="15/07/23"
         android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/fecha"
+        app:layout_constraintStart_toEndOf="@+id/labelFecha"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/fecha"
+        android:id="@+id/labelFecha"
         android:layout_width="70dp"
         android:layout_height="15dp"
         android:layout_marginBottom="8dp"
@@ -47,7 +47,7 @@
 
 
     <TextView
-        android:id="@+id/precio"
+        android:id="@+id/inicioTime"
         android:layout_width="50dp"
         android:layout_height="16dp"
         android:layout_marginStart="12dp"
@@ -55,12 +55,12 @@
         android:text="3:00 pm"
         android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/precio2"
+        app:layout_constraintStart_toEndOf="@+id/labelTextInicio"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.522" />
 
     <TextView
-        android:id="@+id/precio2"
+        android:id="@+id/labelTextInicio"
         android:layout_width="60dp"
         android:layout_height="16dp"
         android:layout_marginTop="40dp"
@@ -68,12 +68,12 @@
         android:textSize="12sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/nombre"
+        app:layout_constraintStart_toStartOf="@+id/titulo"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.506" />
 
     <TextView
-        android:id="@+id/fin"
+        android:id="@+id/labelTextFin"
         android:layout_width="60dp"
         android:layout_height="16dp"
         android:layout_marginStart="32dp"
@@ -82,17 +82,17 @@
         android:textSize="12sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/precio"
+        app:layout_constraintStart_toEndOf="@+id/inicioTime"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/finhora"
+        android:id="@+id/finTime"
         android:layout_width="50dp"
         android:layout_height="16dp"
         android:layout_marginStart="16dp"
         android:text="1:00 pm"
         android:textSize="12sp"
-        app:layout_constraintStart_toEndOf="@+id/fin"
+        app:layout_constraintStart_toEndOf="@+id/labelTextFin"
         tools:layout_editor_absoluteY="63dp" />
 
     <ImageButton
@@ -102,7 +102,7 @@
         android:layout_marginStart="100dp"
         android:layout_marginTop="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/nombre"
+        app:layout_constraintStart_toEndOf="@+id/titulo"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@drawable/baseline_delete_24" />

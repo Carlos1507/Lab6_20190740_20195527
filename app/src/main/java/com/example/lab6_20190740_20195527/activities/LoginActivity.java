@@ -7,7 +7,6 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 
-import com.example.lab6_20190740_20195527.R;
 import com.example.lab6_20190740_20195527.databinding.ActivityLoginBinding;
 import com.example.lab6_20190740_20195527.entities.Usuario;
 import com.google.android.gms.auth.api.Auth;
@@ -40,7 +39,7 @@ public class LoginActivity extends AppCompatActivity {
         binding.loginGoogle.setOnClickListener(view -> {
             Intent intent = Auth.GoogleSignInApi.getSignInIntent(googleApiClient);
             startActivityForResult(intent, RC_SIGN_INT);
-            Log.d(TAG, "LOGIN BOTÓN");
+            Log.d(TAG+"log", "LOGIN BOTÓN");
         });
     }
     @Override
@@ -49,13 +48,13 @@ public class LoginActivity extends AppCompatActivity {
         if(requestCode == RC_SIGN_INT){
             GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
             handleSignInResult(result);
-            Log.d(TAG, "ACTIVITY RESULT");
+            Log.d(TAG+"act", "ACTIVITY RESULT");
         }
     }
 
     private void handleSignInResult(GoogleSignInResult result){
         if (result.isSuccess()){
-            Log.d(TAG, "HANDLE SIGN IN RESULT");
+            Log.d(TAG+"hand", "HANDLE SIGN IN RESULT");
             GoogleSignInAccount account =result.getSignInAccount();
             Log.d("acct", "Usuario logueado con google");
 
@@ -64,7 +63,7 @@ public class LoginActivity extends AppCompatActivity {
             usuario.setApellido(account.getFamilyName());
             usuario.setCorreo(account.getEmail());
             usuario.setGoogleKey(account.getId());
-            Log.d(TAG, usuario.getNombre()+usuario.getCorreo());
+            Log.d(TAG+"user", usuario.getNombre()+usuario.getCorreo());
 
             Gson gson = new Gson();
             SharedPreferences sharedPreferences = getSharedPreferences("MainPreference",MODE_PRIVATE);
@@ -74,7 +73,7 @@ public class LoginActivity extends AppCompatActivity {
             Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
         }else{
-            Log.d(TAG, "NOT SUCCESS HANDLE SIGN IN RESULT");
+            Log.d(TAG+"not succ", "NOT SUCCESS HANDLE SIGN IN RESULT");
         }
     }
 
