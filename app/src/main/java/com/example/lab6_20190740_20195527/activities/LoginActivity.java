@@ -7,6 +7,9 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 
+import com.auth0.jwt.JWT;
+import com.auth0.jwt.exceptions.JWTDecodeException;
+import com.auth0.jwt.interfaces.DecodedJWT;
 import com.example.lab6_20190740_20195527.databinding.ActivityLoginBinding;
 import com.example.lab6_20190740_20195527.entities.Usuario;
 import com.google.android.gms.auth.api.Auth;
@@ -15,6 +18,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.gson.Gson;
 
 public class LoginActivity extends AppCompatActivity {
@@ -57,14 +61,12 @@ public class LoginActivity extends AppCompatActivity {
             Log.d(TAG+"hand", "HANDLE SIGN IN RESULT");
             GoogleSignInAccount account =result.getSignInAccount();
             Log.d("acct", "Usuario logueado con google");
-
             Usuario usuario = new Usuario();
             usuario.setNombre(account.getGivenName());
             usuario.setApellido(account.getFamilyName());
             usuario.setCorreo(account.getEmail());
             usuario.setGoogleKey(account.getId());
-            Log.d(TAG+"user", usuario.getNombre()+usuario.getCorreo());
-
+            Log.d("googlekey", usuario.getGoogleKey());
             Gson gson = new Gson();
             SharedPreferences sharedPreferences = getSharedPreferences("MainPreference",MODE_PRIVATE);
             SharedPreferences.Editor editor =sharedPreferences.edit();
@@ -77,5 +79,16 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
+
+    public String getUUIDFromIdToken(String idToken) {
+        try {
+            DecodedJWT jwt = JWT.decode(idToken);
+            String subject = jwt.getSubject();
+            return subject;
+        } catch (JWTDecodeException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 
 }
