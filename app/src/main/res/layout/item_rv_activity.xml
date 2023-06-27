@@ -5,7 +5,6 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content">
 
-
     <TextView
         android:id="@+id/titulo"
         android:layout_width="202dp"
@@ -98,14 +97,29 @@
 
     <ImageButton
         android:id="@+id/btnTrash"
-        android:layout_width="47dp"
-        android:layout_height="49dp"
+        android:layout_width="40dp"
+        android:layout_height="42dp"
         android:layout_marginStart="100dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:layout_marginEnd="20dp"
+        android:clickable="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/titulo"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@drawable/baseline_delete_24" />
+
+    <ImageView
+        android:id="@+id/editar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#494646"
+        app:srcCompat="@drawable/baseline_edit_24"
+        android:layout_marginBottom="15dp"
+        android:layout_marginEnd="8dp"
+        android:clickable="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

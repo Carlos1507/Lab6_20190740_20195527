@@ -27,6 +27,7 @@ import com.google.gson.reflect.TypeToken;
 import java.lang.reflect.Type;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.Random;
 
 public class CrearActivity extends AppCompatActivity {
     ActivityCrearBinding binding;
@@ -86,30 +87,27 @@ public class CrearActivity extends AppCompatActivity {
             String fechaStr = binding.editTextFecha.getText().toString();
             String timeInicioStr = binding.editTextHoraInicio.getText().toString();
             String timeFinStr = binding.editTextHoraFin.getText().toString();
-            databaseReference.child(uuid).addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    long count = snapshot.getChildrenCount();
-                    Actividad actividad = new Actividad();
-                    actividad.setDescripcion(descripcion);
-                    actividad.setTitulo(titulo);
-                    actividad.setIdAct("Actividad_"+(count+1));
-                    actividad.setHoraInicio(timeInicioStr);
-                    actividad.setHoraFin(timeFinStr);
-                    actividad.setFecha(fechaStr);
-                    Log.d("googlekey", usuarioLog.getGoogleKey());
-                    databaseReference.child(uuid).child(actividad.getIdAct()).setValue(actividad);
-                    Intent intent = new Intent(CrearActivity.this, MainActivity.class);
-                    startActivity(intent);
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
-
-                }
-            });
-
-
+            Actividad actividad = new Actividad();
+            actividad.setDescripcion(descripcion);
+            actividad.setTitulo(titulo);
+            actividad.setIdAct("Actividad_"+generateID(7));
+            actividad.setHoraInicio(timeInicioStr);
+            actividad.setHoraFin(timeFinStr);
+            actividad.setFecha(fechaStr);
+            Log.d("googlekey", usuarioLog.getGoogleKey());
+            databaseReference.child(uuid).child(actividad.getIdAct()).setValue(actividad);
+            Intent intent = new Intent(CrearActivity.this, MainActivity.class);
+            startActivity(intent);
         });
+    }
+
+    private String generateID(int tamano){
+        String letras = "1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+        Random r = new Random();
+        String id = "";
+        for (int i = 0; i<tamano; i++){
+            id+= letras.charAt(r.nextInt(letras.length()));
+        }
+        return id;
     }
 }
