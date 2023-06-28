@@ -112,14 +112,11 @@
         android:id="@+id/anadirActividad"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="32dp"
         android:backgroundTint="@color/teal_700"
         android:text="Agregar Actividad"
         android:textColor="@color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent" />
+        tools:layout_editor_absoluteX="124dp"
+        tools:layout_editor_absoluteY="620dp" />
 
     <EditText
         android:id="@+id/editTextTitulo"
@@ -189,13 +186,13 @@
         android:id="@+id/subir"
         android:layout_width="150dp"
         android:layout_height="150dp"
-        android:layout_marginBottom="40dp"
+        android:layout_marginBottom="8dp"
         android:clickable="true"
         app:layout_constraintBottom_toTopOf="@id/anadirActividad"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/upload"
-        tools:layout_editor_absoluteY="483dp" />
+        app:srcCompat="@drawable/upload" />
 
     <TextView
         android:id="@+id/progreso"
