@@ -10,144 +10,169 @@
         android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         android:text="Nueva actividad"
-        android:textColor="#198eb6"
+        android:textColor="#009688"
         android:textSize="30sp"
         android:textStyle="bold"
-        android:layout_marginTop="20dp"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.564"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/labelTitulo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="40dp"
         android:text="Título"
-        android:textColor="#198eb6"
+        android:textColor="#009688"
         android:textSize="23sp"
         android:textStyle="bold"
-        android:layout_marginTop="40dp"
-        android:layout_marginStart="30dp"
-        app:layout_constraintTop_toBottomOf="@id/title"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/title" />
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="28dp"
+        app:layout_constraintEnd_toStartOf="@+id/title"
+        app:layout_constraintHorizontal_bias="0.882"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/estrellitas" />
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="28dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/title"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/estrellitas" />
 
     <TextView
         android:id="@+id/labelFecha"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="40dp"
         android:text="Fecha"
-        android:textColor="#198eb6"
+        android:textColor="#009688"
         android:textSize="23sp"
         android:textStyle="bold"
-        android:layout_marginTop="40dp"
-        android:layout_marginStart="30dp"
-        app:layout_constraintTop_toBottomOf="@id/labelTitulo"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/labelTitulo" />
 
     <TextView
         android:id="@+id/labelHoraInicio"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="40dp"
         android:text="Hora Inicio"
-        android:textColor="#198eb6"
+        android:textColor="#009688"
         android:textSize="23sp"
         android:textStyle="bold"
-        android:layout_marginTop="40dp"
-        android:layout_marginStart="30dp"
-        app:layout_constraintTop_toBottomOf="@id/labelFecha"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/labelFecha" />
 
     <TextView
         android:id="@+id/labelHoraFin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="40dp"
         android:text="Hora Fin"
-        android:textColor="#198eb6"
+        android:textColor="#009688"
         android:textSize="23sp"
         android:textStyle="bold"
-        android:layout_marginTop="40dp"
-        android:layout_marginStart="30dp"
-        app:layout_constraintTop_toBottomOf="@id/labelHoraInicio"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/labelHoraInicio" />
+
     <TextView
         android:id="@+id/labelDescripcion"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="40dp"
         android:text="Descripción"
-        android:textColor="#198eb6"
+        android:textColor="#009688"
         android:textSize="23sp"
         android:textStyle="bold"
-        android:layout_marginTop="40dp"
-        android:layout_marginStart="30dp"
-        app:layout_constraintTop_toBottomOf="@id/labelHoraFin"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/labelHoraFin" />
 
     <Button
         android:id="@+id/anadirActividad"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="32dp"
+        android:backgroundTint="@color/teal_700"
         android:text="Agregar Actividad"
-        android:backgroundTint="@color/celeste"
         android:textColor="@color/white"
-        android:layout_marginBottom="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
         android:id="@+id/editTextTitulo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:hint="Titulo de la actividad"
         android:layout_marginStart="70dp"
-        app:layout_constraintTop_toTopOf="@id/labelTitulo"
-        app:layout_constraintStart_toEndOf="@id/labelTitulo"/>
+        android:ems="10"
+        android:hint="Titulo de la actividad"
+        android:inputType="textPersonName"
+        app:layout_constraintStart_toEndOf="@id/labelTitulo"
+        app:layout_constraintTop_toTopOf="@id/labelTitulo" />
 
     <EditText
         android:id="@+id/editTextFecha"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="date"
-        android:focusable="false"
         android:clickable="true"
-        android:maxLines="1"
+        android:ems="10"
+        android:focusable="false"
         android:hint="dd/mm/aa"
+        android:inputType="date"
+        android:maxLines="1"
         android:textAlignment="center"
-        app:layout_constraintTop_toTopOf="@id/labelFecha"
-        app:layout_constraintStart_toStartOf="@id/editTextTitulo"/>
+        app:layout_constraintStart_toStartOf="@id/editTextTitulo"
+        app:layout_constraintTop_toTopOf="@id/labelFecha" />
 
     <EditText
         android:id="@+id/editTextHoraInicio"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="time"
-        android:hint="hh:mm"
-        android:focusable="false"
         android:clickable="true"
+        android:ems="10"
+        android:focusable="false"
+        android:hint="hh:mm"
+        android:inputType="time"
         android:maxLines="1"
         android:textAlignment="center"
-        app:layout_constraintTop_toTopOf="@id/labelHoraInicio"
-        app:layout_constraintStart_toStartOf="@id/editTextTitulo"/>
+        app:layout_constraintStart_toStartOf="@id/editTextTitulo"
+        app:layout_constraintTop_toTopOf="@id/labelHoraInicio" />
 
     <EditText
         android:id="@+id/editTextHoraFin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="time"
-        android:hint="hh:mm"
-        android:focusable="false"
         android:clickable="true"
+        android:ems="10"
+        android:focusable="false"
+        android:hint="hh:mm"
+        android:inputType="time"
         android:maxLines="1"
         android:textAlignment="center"
-        app:layout_constraintTop_toTopOf="@id/labelHoraFin"
-        app:layout_constraintStart_toStartOf="@id/editTextTitulo"/>
+        app:layout_constraintStart_toStartOf="@id/editTextTitulo"
+        app:layout_constraintTop_toTopOf="@id/labelHoraFin" />
 
     <EditText
         android:id="@+id/editTextDescripcion"
@@ -158,14 +183,14 @@
         android:hint="Descripción de su actividad"
         android:inputType="textMultiLine"
         app:layout_constraintStart_toStartOf="@id/editTextTitulo"
-        app:layout_constraintTop_toTopOf="@id/labelDescripcion"/>
+        app:layout_constraintTop_toTopOf="@id/labelDescripcion" />
 
     <ImageView
         android:id="@+id/subir"
         android:layout_width="130dp"
         android:layout_height="150dp"
-        android:clickable="true"
         android:layout_marginBottom="40dp"
+        android:clickable="true"
         app:layout_constraintBottom_toTopOf="@id/anadirActividad"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -176,10 +201,10 @@
         android:id="@+id/progreso"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text=""
         android:layout_marginTop="5dp"
-        android:textSize="15sp"
+        android:text=""
         android:textColor="@color/black"
+        android:textSize="15sp"
         app:layout_constraintEnd_toEndOf="@+id/subir"
         app:layout_constraintStart_toStartOf="@+id/subir"
         app:layout_constraintTop_toBottomOf="@+id/subir" />

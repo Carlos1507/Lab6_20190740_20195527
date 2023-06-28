@@ -11,7 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Actualizar actividad"
-        android:textColor="#198eb6"
+        android:textColor="#009688"
         android:textSize="30sp"
         android:textStyle="bold"
         android:layout_marginTop="20dp"

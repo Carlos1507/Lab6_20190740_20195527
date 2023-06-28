@@ -13,7 +13,7 @@
         android:layout_marginBottom="70dp"
         android:text="Titulo"
         android:textAlignment="viewStart"
-        android:textColor="@color/black"
+        android:textColor="@color/teal_700"
         android:textSize="15sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -24,47 +24,49 @@
         android:id="@+id/fechaValue"
         android:layout_width="134dp"
         android:layout_height="15dp"
-        android:layout_marginStart="3dp"
+        android:layout_marginStart="8dp"
         android:layout_marginBottom="8dp"
         android:text="15/07/23"
         android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/labelFecha"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.506" />
 
     <TextView
         android:id="@+id/labelFecha"
-        android:layout_width="70dp"
+        android:layout_width="40dp"
         android:layout_height="15dp"
+        android:layout_marginStart="10dp"
         android:layout_marginBottom="8dp"
         android:text="Fecha:"
+        android:textColor="@color/teal_700"
         android:textSize="12sp"
         android:textStyle="bold"
-        android:layout_marginStart="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
     <TextView
         android:id="@+id/inicioTime"
         android:layout_width="50dp"
         android:layout_height="16dp"
-        android:layout_marginStart="12dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="40dp"
         android:text="3:00 pm"
         android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/labelTextInicio"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.522" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/labelTextInicio"
-        android:layout_width="60dp"
+        android:layout_width="40dp"
         android:layout_height="16dp"
         android:layout_marginTop="40dp"
         android:text="Inicio:"
+        android:textColor="@color/teal_700"
         android:textSize="12sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -74,11 +76,12 @@
 
     <TextView
         android:id="@+id/labelTextFin"
-        android:layout_width="60dp"
+        android:layout_width="40dp"
         android:layout_height="16dp"
-        android:layout_marginStart="32dp"
+        android:layout_marginStart="40dp"
         android:layout_marginTop="40dp"
         android:text="Fin:"
+        android:textColor="@color/teal_700"
         android:textSize="12sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -89,7 +92,7 @@
         android:id="@+id/finTime"
         android:layout_width="50dp"
         android:layout_height="16dp"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="4dp"
         android:text="1:00 pm"
         android:textSize="12sp"
         app:layout_constraintStart_toEndOf="@+id/labelTextFin"
@@ -101,7 +104,6 @@
         android:layout_height="42dp"
         android:layout_marginStart="100dp"
         android:layout_marginTop="10dp"
-        android:layout_marginEnd="20dp"
         android:clickable="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/titulo"
@@ -113,24 +115,34 @@
         android:id="@+id/editar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:backgroundTint="#494646"
-        app:srcCompat="@drawable/baseline_edit_24"
-        android:layout_marginBottom="15dp"
         android:layout_marginEnd="8dp"
+        android:layout_marginBottom="15dp"
+        android:backgroundTint="#494646"
         android:clickable="true"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/baseline_edit_24" />
 
     <ImageView
         android:id="@+id/detalle"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
         android:layout_marginEnd="15dp"
         android:clickable="true"
         app:layout_constraintBottom_toBottomOf="@+id/btnTrash"
         app:layout_constraintEnd_toStartOf="@+id/btnTrash"
         app:layout_constraintTop_toTopOf="@+id/btnTrash"
         app:srcCompat="@drawable/baseline_open_in_new_24" />
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_marginTop="56dp"
+        app:layout_constraintEnd_toStartOf="@+id/labelTextFin"
+        app:layout_constraintHorizontal_bias="0.466"
+        app:layout_constraintStart_toEndOf="@+id/inicioTime"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/estrellitas" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
