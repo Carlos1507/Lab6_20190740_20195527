@@ -18,7 +18,7 @@ public class DateCrearPickerFragment extends DialogFragment implements DatePicke
     @Override
     public void onDateSet(DatePicker datePicker, int year, int month, int day) {
         CrearActivity crearActivity = (CrearActivity) getActivity();
-        crearActivity.setFecha(LocalDate.of(year, month, day));
+        crearActivity.setFecha(LocalDate.of(year, month+1, day));
     }
     @NonNull
     @Override

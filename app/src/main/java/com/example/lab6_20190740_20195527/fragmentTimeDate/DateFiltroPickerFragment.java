@@ -18,7 +18,7 @@ public class DateFiltroPickerFragment extends DialogFragment implements DatePick
     @Override
     public void onDateSet(DatePicker datePicker, int year, int month, int day) {
         MainActivity mainActivity = (MainActivity) getActivity();
-        mainActivity.respuestaDateDialog(year, month, day);
+        mainActivity.respuestaDateDialog(year, month+1, day);
     }
     @NonNull
     @Override

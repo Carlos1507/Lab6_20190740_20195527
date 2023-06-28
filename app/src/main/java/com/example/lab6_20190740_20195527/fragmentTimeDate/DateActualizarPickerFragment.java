@@ -19,7 +19,7 @@ public class DateActualizarPickerFragment extends DialogFragment implements Date
     @Override
     public void onDateSet(DatePicker datePicker, int year, int month, int day) {
         ActualizarActivity actualizarActivity = (ActualizarActivity) getActivity();
-        actualizarActivity.setFecha(LocalDate.of(year, month, day));
+        actualizarActivity.setFecha(LocalDate.of(year, month+1, day));
     }
     @NonNull
     @Override

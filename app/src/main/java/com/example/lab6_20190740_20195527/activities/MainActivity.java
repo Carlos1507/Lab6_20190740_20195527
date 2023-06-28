@@ -30,7 +30,9 @@ import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -50,6 +52,17 @@ public class MainActivity extends AppCompatActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        LocalDate fechaActual = LocalDate.now();
+        Log.d("fechaInicioyFin", fechaActual.getMonthValue()+"");
+        DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        String fechaFormateada = fechaActual.format(formato);
+        binding.fechaFin.setText(fechaFormateada);
+        binding.fechaInicio.setText(fechaFormateada);
+        LocalTime minTime = LocalTime.of(6,0);
+        LocalTime maxTime = LocalTime.of(23,30);
+        binding.horaInicio.setText(config.horaStrFormateada(minTime));
+        binding.horaFin.setText(config.horaStrFormateada(maxTime));
+
         Gson gson = new Gson();
         SharedPreferences sharedPreferences = getSharedPreferences("MainPreference", MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -57,6 +70,8 @@ public class MainActivity extends AppCompatActivity {
         Type userType = new TypeToken<Usuario>(){}.getType();
         Usuario usuarioLog = gson.fromJson(userStr, userType);
 
+        ListaActividadesAdapter adapter = new ListaActividadesAdapter();
+        adapter.setContext(MainActivity.this);
 
         firebaseDatabase = FirebaseDatabase.getInstance();
         DatabaseReference databaseReference = firebaseDatabase.getReference();
@@ -64,13 +79,17 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 List<Actividad> listaActividades = new ArrayList<>();
+                LocalDateTime inicio = fechaActual.atTime(minTime);
+                LocalDateTime fin = fechaActual.atTime(maxTime);
                 for (DataSnapshot children : snapshot.getChildren()){
                     Actividad actividad = children.getValue(Actividad.class);
-                    Log.d("msg-fecha", actividad.getDescripcion());
-                    listaActividades.add(actividad);
+                    LocalDateTime fechaHoraActividadInicio = config.dateStrToLocalDate(actividad.getFecha()).atTime(config.timeStrToLocalTime(actividad.getHoraInicio()));
+                    LocalDateTime fechaHoraActividadFin = config.dateStrToLocalDate(actividad.getFecha()).atTime(config.timeStrToLocalTime(actividad.getHoraFin()));
+                    Log.d("fechaInicioyFin", fechaHoraActividadInicio.getMonthValue()+""+fechaHoraActividadFin.getMonthValue());
+                    if (inicio.isBefore(fechaHoraActividadInicio) && fechaHoraActividadFin.isBefore(fin)){
+                        listaActividades.add(actividad);
+                    }
                 }
-                ListaActividadesAdapter adapter = new ListaActividadesAdapter();
-                adapter.setContext(MainActivity.this);
                 adapter.setListaActividades(listaActividades);
                 Log.d("msg-fecha", listaActividades.size()+"");
                 binding.recyclerActivities.setAdapter(adapter);
@@ -80,6 +99,41 @@ public class MainActivity extends AppCompatActivity {
             public void onCancelled(@NonNull DatabaseError error) {
 
             }
+        });
+
+        binding.filtro.setOnClickListener(view -> {
+
+            LocalDate fechaInicioFiltro = config.dateStrToLocalDate(binding.fechaInicio.getText().toString());
+            LocalDate fechaFinFiltro = config.dateStrToLocalDate(binding.fechaFin.getText().toString());
+            LocalTime horaInicioFiltro = config.timeStrToLocalTime(binding.horaInicio.getText().toString());
+            LocalTime horaFinFiltro = config.timeStrToLocalTime(binding.horaFin.getText().toString());
+            LocalDateTime inicioFiltro = fechaInicioFiltro.atTime(horaInicioFiltro);
+            LocalDateTime finFiltro = fechaFinFiltro.atTime(horaFinFiltro);
+            databaseReference.child(usuarioLog.getGoogleKey()).addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    List<Actividad> listaActividades = new ArrayList<>();
+                    for (DataSnapshot children : snapshot.getChildren()){
+                        Actividad actividad = children.getValue(Actividad.class);
+                        LocalDateTime fechaHoraActividadInicio = config.dateStrToLocalDate(actividad.getFecha()).atTime(config.timeStrToLocalTime(actividad.getHoraInicio()));
+                        LocalDateTime fechaHoraActividadFin = config.dateStrToLocalDate(actividad.getFecha()).atTime(config.timeStrToLocalTime(actividad.getHoraFin()));
+                        if (inicioFiltro.isBefore(fechaHoraActividadInicio) && fechaHoraActividadFin.isBefore(finFiltro)){
+                            listaActividades.add(actividad);
+                        }
+                    }
+                    adapter.setListaActividades(listaActividades);
+                    adapter.notifyDataSetChanged();
+                    binding.recyclerActivities.setAdapter(adapter);
+                    binding.recyclerActivities.setLayoutManager(new LinearLayoutManager(MainActivity.this));
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+
+
         });
 
         binding.fechaInicio.setOnClickListener(view -> {

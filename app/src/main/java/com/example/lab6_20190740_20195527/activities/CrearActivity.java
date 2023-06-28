@@ -126,6 +126,7 @@ public class CrearActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         binding.progreso.setText("");
         if (requestCode == 1 && resultCode == RESULT_OK && data !=null && data.getData()!=null){
+            binding.progreso.setText("Subiendo ...");
             Gson gson = new Gson();
             SharedPreferences sharedPreferences = getSharedPreferences("MainPreference", MODE_PRIVATE);
             String userStr = sharedPreferences.getString("usuario", "");
