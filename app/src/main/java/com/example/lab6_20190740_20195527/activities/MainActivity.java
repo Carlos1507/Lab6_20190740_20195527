@@ -10,6 +10,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 
+import com.example.lab6_20190740_20195527.Config;
 import com.example.lab6_20190740_20195527.adapters.ListaActividadesAdapter;
 import com.example.lab6_20190740_20195527.entities.Actividad;
 import com.example.lab6_20190740_20195527.fragmentTimeDate.DateFiltroPickerFragment;
@@ -36,6 +37,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
     ActivityMainBinding binding;
     FirebaseDatabase firebaseDatabase;
+    Config config = new Config();
     LocalDate fechaInicio;
     Boolean setearDateInicio = false;
     LocalDate fechaFin;
@@ -79,7 +81,6 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-
 
         binding.fechaInicio.setOnClickListener(view -> {
             DateFiltroPickerFragment dateFiltroPickerFragment = new DateFiltroPickerFragment();
@@ -135,11 +136,11 @@ public class MainActivity extends AppCompatActivity {
         LocalDate fecha = LocalDate.of(year, month, day);
         if (setearDateInicio){
             fechaInicio = fecha;
-            binding.fechaInicio.setText(day+"/"+(month+1)+"/"+year);
+            binding.fechaInicio.setText(config.fechaStrFormateada(fecha));
             setearDateInicio = false;
         }else{
             fechaFin = fecha;
-            binding.fechaFin.setText(day+"/"+(month+1)+"/"+year);
+            binding.fechaFin.setText(config.fechaStrFormateada(fecha));
         }
     }
     public void respuestaTimeDialog(int hour, int minute){
@@ -148,11 +149,11 @@ public class MainActivity extends AppCompatActivity {
         LocalTime time = LocalTime.of(hour, minute);
         if (setearTimeInicio){
             horaInicio = time;
-            binding.horaInicio.setText(hour+":"+minute);
+            binding.horaInicio.setText(config.horaStrFormateada(time));
             setearTimeInicio = false;
         }else{
             horaFin = time;
-            binding.horaFin.setText(hour+":"+minute);
+            binding.horaFin.setText(config.horaStrFormateada(time));
         }
     }
 }

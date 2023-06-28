@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.util.Log;
 
 
+import com.example.lab6_20190740_20195527.Config;
 import com.example.lab6_20190740_20195527.fragmentTimeDate.DateCrearPickerFragment;
 import com.example.lab6_20190740_20195527.fragmentTimeDate.TimeFinCrearPickerFragment;
 import com.example.lab6_20190740_20195527.fragmentTimeDate.TimeInicioCrearPickerFragment;
@@ -32,6 +33,7 @@ import java.util.Random;
 public class CrearActivity extends AppCompatActivity {
     ActivityCrearBinding binding;
     FirebaseDatabase firebaseDatabase;
+    Config config = new Config();
 
     public LocalDate fecha;
     public LocalTime horaInicio;
@@ -39,17 +41,17 @@ public class CrearActivity extends AppCompatActivity {
 
     public void setHoraFin(LocalTime horaFin) {
         this.horaFin = horaFin;
-        binding.editTextHoraFin.setText(horaFin.getHour()+":"+horaFin.getMinute());
+        binding.editTextHoraFin.setText(config.horaStrFormateada(horaFin));
     }
 
     public void setHoraInicio(LocalTime horaInicio) {
         this.horaInicio = horaInicio;
-        binding.editTextHoraInicio.setText(horaInicio.getHour()+":"+horaInicio.getMinute());
+        binding.editTextHoraInicio.setText(config.horaStrFormateada(horaInicio));
     }
 
     public void setFecha(LocalDate fecha) {
         this.fecha = fecha;
-        binding.editTextFecha.setText(fecha.getDayOfMonth()+"/"+(fecha.getMonthValue()+1)+"/"+fecha.getYear());
+        binding.editTextFecha.setText(config.fechaStrFormateada(fecha));
     }
 
     @Override

@@ -19,6 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.lab6_20190740_20195527.R;
 import com.example.lab6_20190740_20195527.activities.ActualizarActivity;
+import com.example.lab6_20190740_20195527.activities.DetalleActivity;
 import com.example.lab6_20190740_20195527.entities.Actividad;
 import com.example.lab6_20190740_20195527.entities.Usuario;
 import com.google.firebase.database.DatabaseReference;
@@ -80,12 +81,20 @@ public class ListaActividadesAdapter extends RecyclerView.Adapter<ListaActividad
         ImageView editar = holder.itemView.findViewById(R.id.editar);
         editar.setOnClickListener(view -> {
             String actividad = gson.toJson(activ);
-            editor.putString("activEditar", actividad);
+            editor.putString("actividad", actividad);
             editor.apply();
             Intent intent = new Intent(context, ActualizarActivity.class);
             context.startActivity(intent);
         });
 
+        ImageView detalle = holder.itemView.findViewById(R.id.detalle);
+        detalle.setOnClickListener(view -> {
+            String actividad = gson.toJson(activ);
+            editor.putString("actividad", actividad);
+            editor.apply();
+            Intent intent = new Intent(context, DetalleActivity.class);
+            context.startActivity(intent);
+        });
 
     }
 

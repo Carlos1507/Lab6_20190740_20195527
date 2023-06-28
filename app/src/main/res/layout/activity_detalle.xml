@@ -7,7 +7,7 @@
     tools:context=".activities.DetalleActivity">
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/tituloDetalle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="60dp"
@@ -25,46 +25,41 @@
 
 
     <TextView
-        android:id="@+id/fechaText"
+        android:id="@+id/fecha"
         android:layout_width="134dp"
         android:layout_height="15dp"
         android:layout_marginStart="36dp"
-        android:layout_marginBottom="8dp"
         android:text="15/07/23"
         android:textSize="12sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/fecha"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.439" />
+        app:layout_constraintStart_toEndOf="@+id/fechaLabel"
+        app:layout_constraintTop_toTopOf="@+id/fechaLabel" />
 
     <TextView
-        android:id="@+id/fecha"
+        android:id="@+id/fechaLabel"
         android:layout_width="70dp"
         android:layout_height="15dp"
         android:layout_marginBottom="8dp"
         android:text="Fecha:"
         android:textSize="12sp"
+        android:layout_marginStart="50dp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.439"
-        tools:layout_editor_absoluteX="60dp" />
+        app:layout_constraintVertical_bias="0.439" />
 
     <TextView
-        android:id="@+id/precio"
+        android:id="@+id/timeInicio"
         android:layout_width="50dp"
         android:layout_height="16dp"
         android:layout_marginStart="12dp"
-        android:layout_marginTop="40dp"
         android:text="3:00 pm"
         android:textSize="12sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/precio2"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.451" />
+        app:layout_constraintStart_toEndOf="@+id/tiempoInicioLabel"
+        app:layout_constraintTop_toTopOf="@+id/tiempoInicioLabel" />
 
     <TextView
-        android:id="@+id/precio2"
+        android:id="@+id/tiempoInicioLabel"
         android:layout_width="55dp"
         android:layout_height="13dp"
         android:layout_marginTop="40dp"
@@ -72,12 +67,12 @@
         android:textSize="12sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/fecha"
+        app:layout_constraintStart_toStartOf="@+id/fechaLabel"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.454" />
 
     <TextView
-        android:id="@+id/fin"
+        android:id="@+id/tiempoFinLabel"
         android:layout_width="60dp"
         android:layout_height="16dp"
         android:layout_marginStart="28dp"
@@ -86,24 +81,23 @@
         android:textSize="12sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/precio"
+        app:layout_constraintStart_toEndOf="@+id/timeInicio"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.451" />
 
 
     <TextView
-        android:id="@+id/finhora"
+        android:id="@+id/timeFin"
         android:layout_width="50dp"
         android:layout_height="16dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="344dp"
         android:text="1:00 pm"
         android:textSize="12sp"
-        app:layout_constraintStart_toEndOf="@+id/fin"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toEndOf="@+id/tiempoFinLabel"
+        app:layout_constraintTop_toTopOf="@+id/tiempoFinLabel" />
 
     <TextView
-        android:id="@+id/text"
+        android:id="@+id/descripcionLabel"
         android:layout_width="70dp"
         android:layout_height="15dp"
         android:layout_marginBottom="8dp"
@@ -111,7 +105,7 @@
         android:textSize="12sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/precio2"
+        app:layout_constraintStart_toStartOf="@+id/tiempoInicioLabel"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.538" />
 
@@ -119,21 +113,30 @@
         android:id="@+id/descripcion"
         android:layout_width="134dp"
         android:layout_height="15dp"
-        android:layout_marginTop="416dp"
+        android:layout_marginTop="20dp"
         android:text="Aqui va la descripción"
         android:textSize="12sp"
-        app:layout_constraintStart_toStartOf="@+id/text"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toStartOf="@+id/descripcionLabel"
+        app:layout_constraintTop_toBottomOf="@+id/descripcionLabel" />
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/fotoActiv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="140dp"
         android:layout_marginTop="124dp"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/tituloDetalle"
+        app:layout_constraintStart_toStartOf="@+id/tituloDetalle"
         app:layout_constraintTop_toTopOf="parent"
         tools:srcCompat="@tools:sample/avatars" />
 
+    <ImageView
+        android:id="@+id/regresar"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_margin="30dp"
+        android:clickable="true"
+        app:srcCompat="@drawable/baseline_arrow_back_24"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

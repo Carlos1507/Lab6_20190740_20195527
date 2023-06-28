@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 
+import com.example.lab6_20190740_20195527.Config;
 import com.example.lab6_20190740_20195527.R;
 import com.example.lab6_20190740_20195527.databinding.ActivityActualizarBinding;
 import com.example.lab6_20190740_20195527.entities.Actividad;
@@ -27,23 +28,24 @@ public class ActualizarActivity extends AppCompatActivity {
     ActivityActualizarBinding binding;
 
     FirebaseDatabase firebaseDatabase;
+    Config config = new Config();
     public LocalDate fecha;
     public LocalTime horaInicio;
     public LocalTime horaFin;
 
     public void setHoraFin(LocalTime horaFin) {
         this.horaFin = horaFin;
-        binding.editTextHoraFin.setText(horaFin.getHour()+":"+horaFin.getMinute());
+        binding.editTextHoraFin.setText(config.horaStrFormateada(horaFin));
     }
 
     public void setHoraInicio(LocalTime horaInicio) {
         this.horaInicio = horaInicio;
-        binding.editTextHoraInicio.setText(horaInicio.getHour()+":"+horaInicio.getMinute());
+        binding.editTextHoraInicio.setText(config.horaStrFormateada(horaInicio));
     }
 
     public void setFecha(LocalDate fecha) {
         this.fecha = fecha;
-        binding.editTextFecha.setText(fecha.getDayOfMonth()+"/"+(fecha.getMonthValue()+1)+"/"+fecha.getYear());
+        binding.editTextFecha.setText(config.fechaStrFormateada(fecha));
     }
 
     @Override
@@ -56,7 +58,9 @@ public class ActualizarActivity extends AppCompatActivity {
         Gson gson = new Gson();
         SharedPreferences sharedPreferences = getSharedPreferences("MainPreference", MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        String activStr = sharedPreferences.getString("activEditar","");
+        String activStr = sharedPreferences.getString("actividad","");
+        editor.remove("actividad");
+        editor.apply();
         Type activType = new TypeToken<Actividad>(){}.getType();
         String userStr = sharedPreferences.getString("usuario", "");
         Type userType = new TypeToken<Usuario>(){}.getType();

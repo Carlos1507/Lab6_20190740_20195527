@@ -16,6 +16,11 @@ import java.util.Calendar;
 public class TimeFinActualizarPickerFragment extends DialogFragment implements TimePickerDialog.OnTimeSetListener{
     public void onTimeSet(TimePicker timePicker, int hour, int minute) {
         ActualizarActivity actualizarActivity = (ActualizarActivity) getActivity();
+        if (hour>=23 && minute>30){
+            hour= 23; minute=30;
+        } else if (hour<6) {
+            hour = 6; minute =0;
+        }
         LocalTime horaFin = LocalTime.of(hour, minute);
         actualizarActivity.setHoraFin(horaFin);
     }

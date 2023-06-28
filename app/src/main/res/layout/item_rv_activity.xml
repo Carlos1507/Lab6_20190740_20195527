@@ -122,4 +122,15 @@
         app:layout_constraintBottom_toBottomOf="parent"
         />
 
+    <ImageView
+        android:id="@+id/detalle"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginEnd="15dp"
+        android:clickable="true"
+        app:layout_constraintBottom_toBottomOf="@+id/btnTrash"
+        app:layout_constraintEnd_toStartOf="@+id/btnTrash"
+        app:layout_constraintTop_toTopOf="@+id/btnTrash"
+        app:srcCompat="@drawable/baseline_open_in_new_24" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
