@@ -1,12 +1,9 @@
 package com.example.lab6_20190740_20195527.activities;
 
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -35,16 +32,14 @@ import java.io.InputStream;
 import java.lang.reflect.Type;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.Random;
 
 public class CrearActivity extends AppCompatActivity {
     ActivityCrearBinding binding;
     FirebaseDatabase firebaseDatabase;
-    String activityName = "Actividad_"+generateID(7);
     Config config = new Config();
+    String activityName = "Actividad_"+config.generateID(7);
 
     FirebaseStorage storage = FirebaseStorage.getInstance();
-    StorageReference reference = storage.getReference();
 
     public LocalDate fecha;
     public LocalTime horaInicio;
@@ -88,7 +83,6 @@ public class CrearActivity extends AppCompatActivity {
            startActivityForResult(intent, 1);
         });
 
-
         binding.editTextHoraInicio.setOnClickListener(view -> {
             TimeInicioCrearPickerFragment timeInicioCrearPickerFragment = new TimeInicioCrearPickerFragment();
             timeInicioCrearPickerFragment.show(getSupportFragmentManager(), "timeInicioCrearPicker");
@@ -121,24 +115,7 @@ public class CrearActivity extends AppCompatActivity {
         });
     }
 
-    private String generateID(int tamano){
-        String letras = "1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
-        Random r = new Random();
-        String id = "";
-        for (int i = 0; i<tamano; i++){
-            id+= letras.charAt(r.nextInt(letras.length()));
-        }
-        return id;
-    }
 
-    public static String obtenerExtensionArchivo(String nombreArchivo) {
-        int indicePunto = nombreArchivo.lastIndexOf(".");
-        if (indicePunto > 0 && indicePunto < nombreArchivo.length() - 1) {
-            return nombreArchivo.substring(indicePunto + 1);
-        } else {
-            return "";
-        }
-    }
 
 
     @Override
@@ -156,13 +133,14 @@ public class CrearActivity extends AppCompatActivity {
             Uri uri = data.getData();
             String fileName = uri.getLastPathSegment();
             String[] strings = fileName.split("/");
-            Log.d("msg-test", strings[1]);
-            String fileNameFinal = activityName+obtenerExtensionArchivo(strings[1]);
+            String fileNameFinal = activityName+ obtenerExtensionArchivo(strings[1]);
             StorageMetadata metadata = new StorageMetadata.Builder()
+                    .setCacheControl("no-store")
                     .setCustomMetadata("nombre", fileNameFinal)
                     .build();
             try {
                 InputStream inputStream = this.getContentResolver().openInputStream(uri);
+
                 StorageReference imageRef = storage.getReference().child(uuid).child(fileNameFinal);
                 Glide.with(this).clear(binding.subir);
                 imageRef.putStream(inputStream, metadata).addOnSuccessListener(taskSnapshot -> {
@@ -178,6 +156,14 @@ public class CrearActivity extends AppCompatActivity {
 
         }else{
             Toast.makeText(CrearActivity.this, "No se seleccionó un archivo", Toast.LENGTH_SHORT).show();
+        }
+    }
+    public String obtenerExtensionArchivo(String nombreArchivo) {
+        int indicePunto = nombreArchivo.lastIndexOf(".");
+        if (indicePunto > 0 && indicePunto < nombreArchivo.length() - 1) {
+            return nombreArchivo.substring(indicePunto + 1);
+        } else {
+            return "";
         }
     }
 }

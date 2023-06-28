@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -22,8 +23,11 @@ import com.example.lab6_20190740_20195527.activities.ActualizarActivity;
 import com.example.lab6_20190740_20195527.activities.DetalleActivity;
 import com.example.lab6_20190740_20195527.entities.Actividad;
 import com.example.lab6_20190740_20195527.entities.Usuario;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -54,7 +58,6 @@ public class ListaActividadesAdapter extends RecyclerView.Adapter<ListaActividad
         String userStr = sharedPreferences.getString("usuario", "");
         Type userType = new TypeToken<Usuario>(){}.getType();
         Usuario usuario = gson.fromJson(userStr, userType);
-
         holder.actividad = activ;
         Log.d("msg-adapter", activ.getTitulo());
         Log.d("msg-adapter", activ.getFecha());
@@ -73,8 +76,17 @@ public class ListaActividadesAdapter extends RecyclerView.Adapter<ListaActividad
         ImageButton eliminar  = holder.itemView.findViewById(R.id.btnTrash);
         eliminar.setOnClickListener(view -> {
             FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();;
+            FirebaseStorage storage = FirebaseStorage.getInstance();
             DatabaseReference registroRef = firebaseDatabase.getReference(usuario.getGoogleKey()+"/"+activ.getIdAct());
-            registroRef.removeValue();
+            StorageReference imageRef = storage.getReference().child(usuario.getGoogleKey()).child(activ.getIdAct());
+            Log.d("msg-imagen", imageRef.getPath());
+            imageRef.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+                @Override
+                public void onSuccess(Void unused) {
+                    registroRef.removeValue();
+                    Toast.makeText(context, "Actividad Eliminada", Toast.LENGTH_SHORT).show();
+                }
+            });
             notifyDataSetChanged();
         });
 
@@ -85,6 +97,7 @@ public class ListaActividadesAdapter extends RecyclerView.Adapter<ListaActividad
             editor.apply();
             Intent intent = new Intent(context, ActualizarActivity.class);
             context.startActivity(intent);
+            notifyDataSetChanged();
         });
 
         ImageView detalle = holder.itemView.findViewById(R.id.detalle);
@@ -94,8 +107,8 @@ public class ListaActividadesAdapter extends RecyclerView.Adapter<ListaActividad
             editor.apply();
             Intent intent = new Intent(context, DetalleActivity.class);
             context.startActivity(intent);
+            notifyDataSetChanged();
         });
-
     }
 
     @Override

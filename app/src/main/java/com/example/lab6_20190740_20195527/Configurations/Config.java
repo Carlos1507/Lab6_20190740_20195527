@@ -2,6 +2,7 @@ package com.example.lab6_20190740_20195527.Configurations;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.Random;
 
 public class Config {
     public String fechaStrFormateada(LocalDate fecha){
@@ -37,6 +38,15 @@ public class Config {
             minuto+=time.getMinute();
         }
         return hora+":"+minuto+" "+extension;
+    }
+    public String generateID(int tamano){
+        String letras = "1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+        Random r = new Random();
+        String id = "";
+        for (int i = 0; i<tamano; i++){
+            id+= letras.charAt(r.nextInt(letras.length()));
+        }
+        return id;
     }
 
 }

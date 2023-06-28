@@ -50,7 +50,7 @@
 
     <TextView
         android:id="@+id/inicioTime"
-        android:layout_width="50dp"
+        android:layout_width="60dp"
         android:layout_height="16dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="40dp"
@@ -90,7 +90,7 @@
 
     <TextView
         android:id="@+id/finTime"
-        android:layout_width="50dp"
+        android:layout_width="60dp"
         android:layout_height="16dp"
         android:layout_marginStart="4dp"
         android:text="1:00 pm"
