@@ -7,8 +7,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 
-import com.example.lab6_20190740_20195527.Config;
-import com.example.lab6_20190740_20195527.R;
+import com.example.lab6_20190740_20195527.Configurations.Config;
 import com.example.lab6_20190740_20195527.databinding.ActivityActualizarBinding;
 import com.example.lab6_20190740_20195527.entities.Actividad;
 import com.example.lab6_20190740_20195527.entities.Usuario;

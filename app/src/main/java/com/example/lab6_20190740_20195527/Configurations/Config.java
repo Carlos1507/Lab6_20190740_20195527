@@ -1,4 +1,4 @@
-package com.example.lab6_20190740_20195527;
+package com.example.lab6_20190740_20195527.Configurations;
 
 import java.time.LocalDate;
 import java.time.LocalTime;

@@ -10,7 +10,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 
-import com.example.lab6_20190740_20195527.Config;
+import com.example.lab6_20190740_20195527.Configurations.Config;
 import com.example.lab6_20190740_20195527.adapters.ListaActividadesAdapter;
 import com.example.lab6_20190740_20195527.entities.Actividad;
 import com.example.lab6_20190740_20195527.fragmentTimeDate.DateFiltroPickerFragment;
