@@ -22,13 +22,13 @@ public class Config {
 
     public String horaStrFormateada(LocalTime time){
         String hora = ""; String minuto = ""; String extension="";
-        if (time.getHour()<10){
-            hora+=("0"+time.getHour());
-            extension+="am";
-        } else if (10<time.getHour() && time.getHour()<13) {
+        if (time.getHour()<12) {
+            hora += (time.getHour());
+            extension += "am";
+        } else if (time.getHour()==12) {
             hora+=time.getHour();
-            extension+="am";
-        }else {
+            extension+="pm";
+        } else {
             hora+=(time.getHour()-12);
             extension+="pm";
         }

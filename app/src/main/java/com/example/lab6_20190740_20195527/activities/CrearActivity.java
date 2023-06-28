@@ -12,6 +12,9 @@ import android.widget.Toast;
 
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.RequestManager;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.request.RequestOptions;
 import com.example.lab6_20190740_20195527.Configurations.Config;
 import com.example.lab6_20190740_20195527.fragmentTimeDate.DateCrearPickerFragment;
 import com.example.lab6_20190740_20195527.fragmentTimeDate.TimeFinCrearPickerFragment;
@@ -40,10 +43,15 @@ public class CrearActivity extends AppCompatActivity {
     String activityName = "Actividad_"+config.generateID(7);
 
     FirebaseStorage storage = FirebaseStorage.getInstance();
+    StorageReference reference = storage.getReference();
 
     public LocalDate fecha;
     public LocalTime horaInicio;
     public LocalTime horaFin;
+
+    RequestOptions requestOptions = new RequestOptions()
+            .skipMemoryCache(true)
+            .diskCacheStrategy(DiskCacheStrategy.NONE);
 
     public void setHoraFin(LocalTime horaFin) {
         this.horaFin = horaFin;
@@ -77,12 +85,10 @@ public class CrearActivity extends AppCompatActivity {
         Usuario usuarioLog = gson.fromJson(userStr, userType);
         String uuid = usuarioLog.getGoogleKey();
 
-
         binding.subir.setOnClickListener(view -> {
            Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
            startActivityForResult(intent, 1);
         });
-
         binding.editTextHoraInicio.setOnClickListener(view -> {
             TimeInicioCrearPickerFragment timeInicioCrearPickerFragment = new TimeInicioCrearPickerFragment();
             timeInicioCrearPickerFragment.show(getSupportFragmentManager(), "timeInicioCrearPicker");
@@ -115,9 +121,6 @@ public class CrearActivity extends AppCompatActivity {
         });
     }
 
-
-
-
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data){
         super.onActivityResult(requestCode, resultCode, data);
@@ -131,22 +134,16 @@ public class CrearActivity extends AppCompatActivity {
             String uuid = usuarioLog.getGoogleKey();
 
             Uri uri = data.getData();
-            String fileName = uri.getLastPathSegment();
-            String[] strings = fileName.split("/");
-            String fileNameFinal = activityName+ obtenerExtensionArchivo(strings[1]);
             StorageMetadata metadata = new StorageMetadata.Builder()
-                    .setCacheControl("no-store")
-                    .setCustomMetadata("nombre", fileNameFinal)
+                    .setCustomMetadata("nombre", activityName)
                     .build();
             try {
                 InputStream inputStream = this.getContentResolver().openInputStream(uri);
-
-                StorageReference imageRef = storage.getReference().child(uuid).child(fileNameFinal);
-                Glide.with(this).clear(binding.subir);
+                StorageReference imageRef = storage.getReference().child(uuid).child(activityName);
                 imageRef.putStream(inputStream, metadata).addOnSuccessListener(taskSnapshot -> {
                     Log.d("msg-test", "archivo subido exitosamente");
                     binding.progreso.setText("100 %");
-                    Glide.with(this).load(imageRef).into(binding.subir);
+                    Glide.with(this).load(imageRef).apply(requestOptions).into(binding.subir);
                 }).addOnFailureListener(e -> {
                     Log.e("msg-test", "error");
                 });

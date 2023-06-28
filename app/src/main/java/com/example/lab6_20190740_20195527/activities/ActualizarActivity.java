@@ -11,6 +11,8 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.request.RequestOptions;
 import com.example.lab6_20190740_20195527.Configurations.Config;
 import com.example.lab6_20190740_20195527.databinding.ActivityActualizarBinding;
 import com.example.lab6_20190740_20195527.entities.Actividad;
@@ -37,6 +39,11 @@ public class ActualizarActivity extends AppCompatActivity {
     ActivityActualizarBinding binding;
     FirebaseDatabase firebaseDatabase;
     Config config = new Config();
+
+    RequestOptions requestOptions = new RequestOptions()
+            .skipMemoryCache(true)
+            .diskCacheStrategy(DiskCacheStrategy.NONE);
+
     public LocalDate fecha;
     public LocalTime horaInicio;
     public LocalTime horaFin;
@@ -82,7 +89,7 @@ public class ActualizarActivity extends AppCompatActivity {
 
         StorageReference imageRef = storage.getReference().child(usuarioLog.getGoogleKey()).child(actividad.getIdAct());
         Log.d("msg-imagen", imageRef.getPath());
-        Glide.with(ActualizarActivity.this).load(imageRef).into(binding.subir);
+        Glide.with(ActualizarActivity.this).load(imageRef).apply(requestOptions).into(binding.subir);
         binding.editTextFecha.setOnClickListener(view -> {
             DateActualizarPickerFragment dateActualizarPickerFragment = new DateActualizarPickerFragment();
             dateActualizarPickerFragment.show(getSupportFragmentManager(), "dateActualizarPicker");
@@ -151,7 +158,6 @@ public class ActualizarActivity extends AppCompatActivity {
                 InputStream inputStream = this.getContentResolver().openInputStream(uri);
                 FirebaseStorage storage = FirebaseStorage.getInstance();
                 StorageReference imageRef = storage.getReference().child(uuid).child(fileNameFinal);
-                Glide.with(ActualizarActivity.this).clear(binding.subir);
                 imageRef.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void unused) {
@@ -159,7 +165,7 @@ public class ActualizarActivity extends AppCompatActivity {
                             Log.d("msg-test", "archivo subido exitosamente");
                             binding.progreso.setText("100 %");
                             StorageReference imageRefNew = storage.getReference().child(uuid).child(fileNameFinal);
-                            Glide.with(ActualizarActivity.this).load(imageRefNew).into(binding.subir);
+                            Glide.with(ActualizarActivity.this).load(imageRefNew).apply(requestOptions).into(binding.subir);
                          }).addOnFailureListener(e -> {
                             Log.e("msg-test", "error");
                         });

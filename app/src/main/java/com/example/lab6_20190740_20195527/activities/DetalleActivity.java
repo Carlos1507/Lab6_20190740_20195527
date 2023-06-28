@@ -7,6 +7,8 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.request.RequestOptions;
 import com.example.lab6_20190740_20195527.databinding.ActivityDetalleBinding;
 import com.example.lab6_20190740_20195527.entities.Actividad;
 import com.example.lab6_20190740_20195527.entities.Usuario;
@@ -20,6 +22,9 @@ import java.lang.reflect.Type;
 
 public class DetalleActivity extends AppCompatActivity {
     ActivityDetalleBinding binding;
+    RequestOptions requestOptions = new RequestOptions()
+            .skipMemoryCache(true)
+            .diskCacheStrategy(DiskCacheStrategy.NONE);
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,7 +49,7 @@ public class DetalleActivity extends AppCompatActivity {
         binding.tituloDetalle.setText(actividad.getTitulo());
         FirebaseStorage storage = FirebaseStorage.getInstance();
         StorageReference imageRef = storage.getReference().child(usuario.getGoogleKey()).child(actividad.getIdAct());
-        Glide.with(this).load(imageRef).into(binding.fotoActiv);
+        Glide.with(this).load(imageRef).apply(requestOptions).into(binding.fotoActiv);
         binding.regresar.setOnClickListener(view -> {
             Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
