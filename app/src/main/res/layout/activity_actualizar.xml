@@ -5,202 +5,257 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".activities.ActualizarActivity">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical" >
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Máximo 30 caracteres"
+                android:textSize="10sp"
+                android:textColor="@color/teal_700"
+                app:layout_constraintEnd_toEndOf="@+id/editTextTitulo"
+                app:layout_constraintTop_toBottomOf="@+id/editTextTitulo" />
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Hora mínima: 6:00 am"
+                android:textSize="10sp"
+                android:textColor="@color/teal_700"
+                app:layout_constraintEnd_toEndOf="@+id/editTextHoraInicio"
+                app:layout_constraintTop_toBottomOf="@+id/editTextHoraInicio" />
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Hora máxima: 11:30 pm"
+                android:textSize="10sp"
+                android:textColor="@color/teal_700"
+                app:layout_constraintEnd_toEndOf="@+id/editTextHoraFin"
+                app:layout_constraintTop_toBottomOf="@+id/editTextHoraFin" />
+            <TextView
+                android:id="@+id/textView5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Máximo 125 caracteres"
+                android:textSize="10sp"
+                android:textColor="@color/teal_700"
+                app:layout_constraintEnd_toEndOf="@+id/labelDescripcion"
+                app:layout_constraintTop_toBottomOf="@+id/labelDescripcion" />
 
-    <ImageView
-        android:id="@+id/imageView5"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_marginTop="28dp"
-        app:layout_constraintEnd_toStartOf="@+id/title"
-        app:layout_constraintHorizontal_bias="0.882"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/estrellitas" />
-    <ImageView
-        android:id="@+id/subir"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:layout_marginBottom="40dp"
-        android:clickable="true"
-        app:layout_constraintBottom_toTopOf="@id/anadirActividad"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/upload"
-        tools:layout_editor_absoluteY="483dp" />
+            <ImageView
+                android:id="@+id/imageView5"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginTop="28dp"
+                app:layout_constraintEnd_toStartOf="@+id/title"
+                app:layout_constraintHorizontal_bias="0.882"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/estrellitas" />
+            <ImageView
+                android:id="@+id/subir"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_marginBottom="40dp"
+                android:clickable="true"
+                android:layout_marginTop="20dp"
+                app:layout_constraintBottom_toTopOf="@id/anadirActividad"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/editTextDescripcion"
+                app:srcCompat="@drawable/upload"
+                />
+            <TextView
+                android:id="@+id/progreso"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text=""
+                android:textColor="@color/black"
+                android:textSize="15sp"
+                app:layout_constraintEnd_toEndOf="@+id/subir"
+                app:layout_constraintStart_toStartOf="@+id/subir"
+                app:layout_constraintTop_toBottomOf="@+id/subir" />
 
-    <TextView
-        android:id="@+id/progreso"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:text=""
-        android:textColor="@color/black"
-        android:textSize="15sp"
-        app:layout_constraintEnd_toEndOf="@+id/subir"
-        app:layout_constraintStart_toStartOf="@+id/subir"
-        app:layout_constraintTop_toBottomOf="@+id/subir" />
+            <ImageView
+                android:id="@+id/imageView14"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="28dp"
+                app:layout_constraintStart_toEndOf="@+id/title"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/estrellitas" />
 
-    <ImageView
-        android:id="@+id/imageView14"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="28dp"
-        app:layout_constraintStart_toEndOf="@+id/title"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/estrellitas" />
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="Actualizar actividad"
+                android:textColor="#009688"
+                android:textSize="30sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="Actualizar actividad"
-        android:textColor="#009688"
-        android:textSize="30sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+            <TextView
+                android:id="@+id/labelTitulo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="40dp"
+                android:text="Título"
+                android:textColor="#009688"
+                android:textSize="23sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/title" />
 
-    <TextView
-        android:id="@+id/labelTitulo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="40dp"
-        android:text="Título"
-        android:textColor="#009688"
-        android:textSize="23sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/title" />
+            <TextView
+                android:id="@+id/labelFecha"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="40dp"
+                android:text="Fecha"
+                android:textColor="#009688"
+                android:textSize="23sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/labelTitulo" />
 
-    <TextView
-        android:id="@+id/labelFecha"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="40dp"
-        android:text="Fecha"
-        android:textColor="#009688"
-        android:textSize="23sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/labelTitulo" />
+            <TextView
+                android:id="@+id/labelHoraInicio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="40dp"
+                android:text="Hora Inicio"
+                android:textColor="#009688"
+                android:textSize="23sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/labelFecha" />
 
-    <TextView
-        android:id="@+id/labelHoraInicio"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="40dp"
-        android:text="Hora Inicio"
-        android:textColor="#009688"
-        android:textSize="23sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/labelFecha" />
+            <TextView
+                android:id="@+id/labelHoraFin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="40dp"
+                android:text="Hora Fin"
+                android:textColor="#009688"
+                android:textSize="23sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/labelHoraInicio" />
 
-    <TextView
-        android:id="@+id/labelHoraFin"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="40dp"
-        android:text="Hora Fin"
-        android:textColor="#009688"
-        android:textSize="23sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/labelHoraInicio" />
+            <TextView
+                android:id="@+id/labelDescripcion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="40dp"
+                android:text="Descripción"
+                android:textColor="#009688"
+                android:textSize="23sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/labelHoraFin" />
 
-    <TextView
-        android:id="@+id/labelDescripcion"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="40dp"
-        android:text="Descripción"
-        android:textColor="#009688"
-        android:textSize="23sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/labelHoraFin" />
+            <Button
+                android:id="@+id/anadirActividad"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
+                android:backgroundTint="@color/teal_700"
+                android:text="Actualizar Actividad"
+                android:textColor="@color/white"
+                android:layout_marginTop="10dp"
+                app:layout_constraintTop_toBottomOf="@id/progreso"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
 
-    <Button
-        android:id="@+id/anadirActividad"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Agregar Actividad"
-        android:backgroundTint="@color/celeste"
-        android:textColor="@color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+            <EditText
+                android:id="@+id/editTextTitulo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="70dp"
+                android:maxLength="30"
+                android:ems="10"
+                android:hint="Titulo de la actividad"
+                android:inputType="textPersonName"
+                app:layout_constraintStart_toEndOf="@id/labelTitulo"
+                app:layout_constraintTop_toTopOf="@id/labelTitulo" />
 
-    <EditText
-        android:id="@+id/editTextTitulo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="70dp"
-        android:ems="10"
-        android:hint="Titulo de la actividad"
-        android:inputType="textPersonName"
-        app:layout_constraintStart_toEndOf="@id/labelTitulo"
-        app:layout_constraintTop_toTopOf="@id/labelTitulo" />
+            <EditText
+                android:id="@+id/editTextFecha"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:ems="10"
+                android:focusable="false"
+                android:hint="dd/mm/aa"
+                android:inputType="date"
+                android:maxLines="1"
+                android:textAlignment="center"
+                app:layout_constraintStart_toStartOf="@id/editTextTitulo"
+                app:layout_constraintTop_toTopOf="@id/labelFecha" />
 
-    <EditText
-        android:id="@+id/editTextFecha"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:clickable="true"
-        android:ems="10"
-        android:focusable="false"
-        android:hint="dd/mm/aa"
-        android:inputType="date"
-        android:maxLines="1"
-        android:textAlignment="center"
-        app:layout_constraintStart_toStartOf="@id/editTextTitulo"
-        app:layout_constraintTop_toTopOf="@id/labelFecha" />
+            <EditText
+                android:id="@+id/editTextHoraInicio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:ems="10"
+                android:focusable="false"
+                android:hint="hh:mm"
+                android:inputType="time"
+                android:maxLines="1"
+                android:textAlignment="center"
+                app:layout_constraintStart_toStartOf="@id/editTextTitulo"
+                app:layout_constraintTop_toTopOf="@id/labelHoraInicio" />
 
-    <EditText
-        android:id="@+id/editTextHoraInicio"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:clickable="true"
-        android:ems="10"
-        android:focusable="false"
-        android:hint="hh:mm"
-        android:inputType="time"
-        android:maxLines="1"
-        android:textAlignment="center"
-        app:layout_constraintStart_toStartOf="@id/editTextTitulo"
-        app:layout_constraintTop_toTopOf="@id/labelHoraInicio" />
+            <EditText
+                android:id="@+id/editTextHoraFin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:ems="10"
+                android:focusable="false"
+                android:hint="hh:mm"
+                android:inputType="time"
+                android:maxLines="1"
+                android:textAlignment="center"
+                app:layout_constraintStart_toStartOf="@id/editTextTitulo"
+                app:layout_constraintTop_toTopOf="@id/labelHoraFin" />
 
-    <EditText
-        android:id="@+id/editTextHoraFin"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:clickable="true"
-        android:ems="10"
-        android:focusable="false"
-        android:hint="hh:mm"
-        android:inputType="time"
-        android:maxLines="1"
-        android:textAlignment="center"
-        app:layout_constraintStart_toStartOf="@id/editTextTitulo"
-        app:layout_constraintTop_toTopOf="@id/labelHoraFin" />
-
-    <EditText
-        android:id="@+id/editTextDescripcion"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:gravity="start|top"
-        android:hint="Descripción de su actividad"
-        android:inputType="textMultiLine"
-        app:layout_constraintStart_toStartOf="@id/editTextTitulo"
-        app:layout_constraintTop_toTopOf="@id/labelDescripcion" />
+                <EditText
+                    android:id="@+id/editTextDescripcion"
+                    android:layout_width="210dp"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:gravity="start|top"
+                    android:hint="Descripción de su actividad"
+                    android:inputType="textMultiLine"
+                    android:maxLength="125"
+                    android:textSize="15sp"
+                    app:layout_constraintStart_toStartOf="@id/editTextTitulo"
+                    app:layout_constraintTop_toTopOf="@id/labelDescripcion" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

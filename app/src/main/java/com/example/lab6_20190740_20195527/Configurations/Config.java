@@ -1,6 +1,9 @@
 package com.example.lab6_20190740_20195527.Configurations;
 
+import android.content.res.ColorStateList;
 import android.util.Log;
+
+import com.example.lab6_20190740_20195527.R;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -63,11 +66,10 @@ public class Config {
         return LocalTime.of(hora, min);
     }
 
-    public LocalDate dateStrToLocalDate(String fechaStr){
+    public LocalDate dateStrToLocalDate(String fechaStr) {
         String[] fecha = fechaStr.split("/");
-        Log.d("fecha", fecha[2]+"/"+fecha[1]+"/"+fecha[0]);
+        Log.d("fecha", fecha[2] + "/" + fecha[1] + "/" + fecha[0]);
         return LocalDate.of(Integer.parseInt(fecha[2]), Integer.parseInt(fecha[1]), Integer.parseInt(fecha[0]));
     }
-
 
 }

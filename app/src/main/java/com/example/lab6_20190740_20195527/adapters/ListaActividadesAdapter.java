@@ -84,7 +84,7 @@ public class ListaActividadesAdapter extends RecyclerView.Adapter<ListaActividad
                 @Override
                 public void onSuccess(Void unused) {
                     registroRef.removeValue();
-                    Toast.makeText(context, "Actividad Eliminada", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, "Actividad Eliminada Exitosamente", Toast.LENGTH_SHORT).show();
                 }
             });
             notifyDataSetChanged();

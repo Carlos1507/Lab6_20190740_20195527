@@ -9,6 +9,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Toast;
 
 import com.example.lab6_20190740_20195527.Configurations.Config;
 import com.example.lab6_20190740_20195527.adapters.ListaActividadesAdapter;
@@ -53,7 +55,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         LocalDate fechaActual = LocalDate.now();
-        Log.d("fechaInicioyFin", fechaActual.getMonthValue()+"");
         DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         String fechaFormateada = fechaActual.format(formato);
         binding.fechaFin.setText(fechaFormateada);
@@ -90,6 +91,13 @@ public class MainActivity extends AppCompatActivity {
                         listaActividades.add(actividad);
                     }
                 }
+                if (listaActividades.size()==0){
+                    binding.mensajeChecklist.setVisibility(View.VISIBLE);
+                    binding.checklist.setVisibility(View.VISIBLE);
+                }else{
+                    binding.mensajeChecklist.setVisibility(View.INVISIBLE);
+                    binding.checklist.setVisibility(View.INVISIBLE);
+                }
                 adapter.setListaActividades(listaActividades);
                 Log.d("msg-fecha", listaActividades.size()+"");
                 binding.recyclerActivities.setAdapter(adapter);
@@ -102,13 +110,21 @@ public class MainActivity extends AppCompatActivity {
         });
 
         binding.filtro.setOnClickListener(view -> {
-
             LocalDate fechaInicioFiltro = config.dateStrToLocalDate(binding.fechaInicio.getText().toString());
             LocalDate fechaFinFiltro = config.dateStrToLocalDate(binding.fechaFin.getText().toString());
             LocalTime horaInicioFiltro = config.timeStrToLocalTime(binding.horaInicio.getText().toString());
             LocalTime horaFinFiltro = config.timeStrToLocalTime(binding.horaFin.getText().toString());
             LocalDateTime inicioFiltro = fechaInicioFiltro.atTime(horaInicioFiltro);
             LocalDateTime finFiltro = fechaFinFiltro.atTime(horaFinFiltro);
+
+            if (finFiltro.isBefore(inicioFiltro)){
+                binding.fechaFin.setText(config.fechaStrFormateada(inicioFiltro.toLocalDate()));
+                binding.horaFin.setText(config.horaStrFormateada(inicioFiltro.toLocalTime()));
+                Toast.makeText(this, "La fecha de fin debe ser mayor a la de inicio", Toast.LENGTH_SHORT).show();
+                finFiltro = inicioFiltro;
+            }
+
+            LocalDateTime finalFinFiltro = finFiltro;
             databaseReference.child(usuarioLog.getGoogleKey()).addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -117,9 +133,16 @@ public class MainActivity extends AppCompatActivity {
                         Actividad actividad = children.getValue(Actividad.class);
                         LocalDateTime fechaHoraActividadInicio = config.dateStrToLocalDate(actividad.getFecha()).atTime(config.timeStrToLocalTime(actividad.getHoraInicio()));
                         LocalDateTime fechaHoraActividadFin = config.dateStrToLocalDate(actividad.getFecha()).atTime(config.timeStrToLocalTime(actividad.getHoraFin()));
-                        if (inicioFiltro.isBefore(fechaHoraActividadInicio) && fechaHoraActividadFin.isBefore(finFiltro)){
+                        if (inicioFiltro.isBefore(fechaHoraActividadInicio) && fechaHoraActividadFin.isBefore(finalFinFiltro)){
                             listaActividades.add(actividad);
                         }
+                    }
+                    if (listaActividades.size()==0){
+                        binding.mensajeChecklist.setVisibility(View.VISIBLE);
+                        binding.checklist.setVisibility(View.VISIBLE);
+                    }else{
+                        binding.mensajeChecklist.setVisibility(View.INVISIBLE);
+                        binding.checklist.setVisibility(View.INVISIBLE);
                     }
                     adapter.setListaActividades(listaActividades);
                     adapter.notifyDataSetChanged();

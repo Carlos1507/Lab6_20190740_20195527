@@ -202,5 +202,29 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/icono" />
 
+    <ImageView
+        android:id="@+id/checklist"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        android:visibility="gone"
+        app:srcCompat="@drawable/baseline_playlist_add_check_24"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <TextView
+        android:id="@+id/mensajeChecklist"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Sin actividades programadas"
+        android:visibility="gone"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@id/checklist"
+        app:layout_constraintEnd_toEndOf="@id/checklist"
+        app:layout_constraintTop_toBottomOf="@id/checklist"/>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

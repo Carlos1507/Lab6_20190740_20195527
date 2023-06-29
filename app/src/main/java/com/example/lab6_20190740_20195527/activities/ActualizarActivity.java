@@ -4,9 +4,13 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -43,6 +47,11 @@ public class ActualizarActivity extends AppCompatActivity {
     RequestOptions requestOptions = new RequestOptions()
             .skipMemoryCache(true)
             .diskCacheStrategy(DiskCacheStrategy.NONE);
+
+    int colorDesact = Color.parseColor("#808080");
+    ColorStateList colorStateList = ColorStateList.valueOf(colorDesact);
+    int colorAct = Color.parseColor("#FF018786");
+    ColorStateList colorActList = ColorStateList.valueOf(colorAct);
 
     public LocalDate fecha;
     public LocalTime horaInicio;
@@ -106,6 +115,60 @@ public class ActualizarActivity extends AppCompatActivity {
             Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
             startActivityForResult(intent, 1);
         });
+
+        binding.editTextHoraFin.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                if (!binding.editTextHoraFin.getText().toString().equals("") && !binding.editTextHoraInicio.getText().toString().equals("")){
+                    if (config.timeStrToLocalTime(binding.editTextHoraInicio.getText().toString()).isAfter(config.timeStrToLocalTime(binding.editTextHoraFin.getText().toString()))){
+                        Toast.makeText(ActualizarActivity.this, "La hora de fin debe ser mayor a la de inicio", Toast.LENGTH_SHORT).show();
+                        binding.editTextHoraFin.setText(binding.editTextHoraInicio.getText().toString());
+                    }
+                }
+            }
+            @Override
+            public void afterTextChanged(Editable editable) {}
+        });
+
+        binding.editTextHoraInicio.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                if (!binding.editTextHoraFin.getText().toString().equals("") && !binding.editTextHoraInicio.getText().toString().equals("")){
+                    if (config.timeStrToLocalTime(binding.editTextHoraInicio.getText().toString()).isAfter(config.timeStrToLocalTime(binding.editTextHoraFin.getText().toString()))){
+                        Toast.makeText(ActualizarActivity.this, "La hora de inicio debe ser menor a la de fin", Toast.LENGTH_SHORT).show();
+                        binding.editTextHoraInicio.setText(binding.editTextHoraFin.getText().toString());
+                    }
+                }
+            }
+            @Override
+            public void afterTextChanged(Editable editable) {}
+        });
+        binding.editTextTitulo.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                validar();
+            }
+            @Override
+            public void afterTextChanged(Editable editable) {}
+        });
+
+        binding.editTextDescripcion.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                validar();
+            }
+            @Override
+            public void afterTextChanged(Editable editable) {}
+        });
+
         binding.anadirActividad.setOnClickListener(view -> {
             String titulo = binding.editTextTitulo.getText().toString();
             String descripcion = binding.editTextDescripcion.getText().toString();
@@ -181,12 +244,16 @@ public class ActualizarActivity extends AppCompatActivity {
         }
     }
 
-    public String obtenerExtensionArchivo(String nombreArchivo) {
-        int indicePunto = nombreArchivo.lastIndexOf(".");
-        if (indicePunto > 0 && indicePunto < nombreArchivo.length() - 1) {
-            return nombreArchivo.substring(indicePunto + 1);
-        } else {
-            return "";
+    public boolean validar(){
+        if (!binding.editTextTitulo.getText().toString().equals("") &&
+                !binding.editTextDescripcion.getText().toString().equals("")){
+            binding.anadirActividad.setEnabled(true);
+            binding.anadirActividad.setBackgroundTintList(colorActList);
+            return true;
+        }else{
+            binding.anadirActividad.setEnabled(false);
+            binding.anadirActividad.setBackgroundTintList(colorStateList);
+            return false;
         }
     }
 }
